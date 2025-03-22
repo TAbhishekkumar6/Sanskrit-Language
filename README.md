@@ -1,4 +1,4 @@
-# Samskrit Programming Language
+# Sanskrit Programming Language
 
 A Sanskrit-inspired programming language for web, Android, and iOS development. This language combines the elegance of Sanskrit with modern programming paradigms.
 
