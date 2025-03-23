@@ -1,16 +1,44 @@
-# Sanskrit Programming Language
+# संस्कृत (Sanskrit) Programming Language
 
-A Sanskrit-inspired programming language for web, Android, and iOS development. This language combines the elegance of Sanskrit with modern programming paradigms.
+A programming language inspired by the ancient Sanskrit language, combining classical linguistic principles with modern programming paradigms.
+
+## About
+
+Sanskrit Programming Language (संस्कृत) is a unique language that applies the precision, structure, and elegance of Sanskrit to computer programming. This project aims to create a programming language that is accessible to both Sanskrit scholars and modern programmers.
 
 ## Features
 
-- Sanskrit-inspired syntax for better readability
-- Built-in data structures with Sanskrit names
-  - Stoop (Stack)
-  - Pankti (Queue)
-  - Shrinkhala (Linked List)
-- TypeScript-based implementation
-- Transpiles to JavaScript
+- **Classical Philosophy**: Based on the precise grammar and logical structures of Sanskrit
+- **Modern Integration**: Compiles to JavaScript for integration with modern web technologies
+- **Dual-Mode Syntax**: Write code in either Devanagari or romanized Sanskrit
+- **Symbolic Operators**: Use standard mathematical symbols instead of word-based operators
+- **Pattern Matching**: Elegant pattern matching for expressive conditional logic
+- **String Interpolation**: Template literals for easy string formatting
+- **Default Parameters**: Simplified function definitions with default values
+- **Type System**: Inspired by Sanskrit's precision with types
+- **Bilingual Error Messages**: Debugging assistance in both Sanskrit and English
+
+## Example
+
+```sanskrit
+कार्य फिबोनाची(संख्या: पूर्णांक) -> पूर्णांक {
+    यदि (संख्या <= 1) {
+        प्रतिदा संख्या;
+    }
+    प्रतिदा फिबोनाची(संख्या - 1) + फिबोनाची(संख्या - 2);
+}
+```
+
+## Romanized Equivalent
+
+```sanskrit
+karya fibonacci(sankhya: purnanank) -> purnanank {
+    yadi (sankhya <= 1) {
+        pratida sankhya;
+    }
+    pratida fibonacci(sankhya - 1) + fibonacci(sankhya - 2);
+}
+```
 
 ## Installation
 
@@ -18,86 +46,28 @@ A Sanskrit-inspired programming language for web, Android, and iOS development. 
 npm install samskrit
 ```
 
-## Usage
+## Running a Program
 
-### Basic Example
-
-```typescript
-import { SamskritCompiler } from 'samskrit';
-
-const code = `
-varga KriyaVinyasa {
-  nijee soochi items;
-  
-  karya nirmata() {
-    items = [];
-  }
-  
-  sarvajanik karya dhakk(vastu) {
-    items.yojay(vastu);
-  }
-}
-`;
-
-const compiler = new SamskritCompiler();
-const jsCode = compiler.compile(code);
-```
-
-### Data Structures
-
-1. Stack (Stoop):
-```typescript
-import { sanrachana } from 'samskrit';
-
-const stack = new sanrachana.Stoop<number>();
-stack.dhakk(1);      // push
-stack.nikaal();      // pop
-stack.rikt();        // isEmpty
-stack.lambai();      // length
-```
-
-2. Queue (Pankti):
-```typescript
-const queue = new sanrachana.Pankti<string>();
-queue.yojay('a');    // enqueue
-queue.nishkas();     // dequeue
-```
-
-3. Linked List (Shrinkhala):
-```typescript
-const list = new sanrachana.Shrinkhala<number>();
-list.yojay(1);       // add
-list.adiyojay(0);    // addFirst
-list.nikaal(1);      // remove
-```
-
-## Development
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/samskrit.git
-cd samskrit
+samskrit run myprogram.sam
 ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+## Documentation
 
-3. Build the project:
-```bash
-npm run build
-```
+See the `docs/` directory for comprehensive documentation:
 
-4. Run tests:
-```bash
-npm test
-```
+- [Improved Syntax Guide](docs/improved_syntax.md)
+- [Language Specification](docs/language_spec.md)
+- [Features Summary](docs/SUMMARY.md)
 
-## Contributing
+## Philosophy
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Sanskrit is known for its precise grammar, rich vocabulary, and logical structure. This programming language aims to apply those principles to create code that is not only functional but also linguistically elegant and philosophically sound.
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT License
+
+## Contributors
+
+This project welcomes contributions from both computer scientists and Sanskrit scholars. 

@@ -1,190 +1,257 @@
-import { ASTNode, TokenType } from '../types';
+import { ASTNode, Parameter, TokenType } from '../types';
 
-export class Transpiler {
-  transpile(ast: ASTNode[]): string {
-    return ast.map(node => this.transpileNode(node)).join('\n');
+export class रूपांतरक {
+  private स्रोत = '';
+  private स्तर = 0;
+
+  रूपांतर(ast: ASTNode[]): string {
+    this.स्रोत = '';
+    for (const कथन of ast) {
+      this.कथनरूपांतर(कथन);
+    }
+    return this.स्रोत;
   }
 
-  private transpileNode(node: ASTNode): string {
-    switch (node.type) {
-      case 'class':
-        return this.transpileClass(node);
-      case 'function':
-        return this.transpileFunction(node);
-      case 'if':
-        return this.transpileIf(node);
-      case 'loop':
-        return this.transpileLoop(node);
-      case 'try':
-        return this.transpileTry(node);
-      case 'block':
-        return this.transpileBlock(node);
-      case 'expression':
-        if (!node.expression) throw new Error("Expression node missing expression");
-        return this.transpileExpression(node.expression) + ';';
-      case 'return':
-        return this.transpileReturn(node);
-      case 'binary':
-        return this.transpileBinary(node);
-      case 'array':
-        return this.transpileArray(node);
-      case 'object':
-        return this.transpileObject(node);
-      case 'literal':
-        return this.transpileLiteral(node);
-      case 'variable':
-        if (!node.name) throw new Error("Variable node missing name");
-        return node.name;
-      case 'grouping':
-        if (!node.expression) throw new Error("Grouping node missing expression");
-        return `(${this.transpileExpression(node.expression)})`;
-      case 'function_call':
-        if (!node.callee) throw new Error("Function call missing callee");
-        return this.transpileFunctionCall(node);
-      case 'logical':
-        return this.transpileLogical(node);
-      case 'bitwise':
-        return this.transpileBitwise(node);
-      case 'assignment':
-        return this.transpileAssignment(node);
+  private कथनरूपांतर(कथन: ASTNode): void {
+    switch (कथन.प्रकार) {
+      case 'वर्ग':
+        this.वर्गरूपांतर(कथन);
+        break;
+      case 'कार्य':
+        this.कार्यरूपांतर(कथन);
+        break;
+      case 'यदि':
+        this.यदिरूपांतर(कथन);
+        break;
+      case 'प्रयत्न':
+        this.प्रयत्नरूपांतर(कथन);
+        break;
+      case 'प्रतिफल':
+        this.प्रतिफलरूपांतर(कथन);
+        break;
+      case 'खंड':
+        this.खंडरूपांतर(कथन);
+        break;
+      case 'अभिव्यक्ति':
+        this.अभिव्यक्तिरूपांतर(कथन.अभिव्यक्ति);
+        this.स्रोत += ';\n';
+        break;
+      case 'चर':
+        this.चरघोषणारूपांतर(कथन);
+        break;
       default:
-        throw new Error(`Unknown node type: ${node.type}`);
+        throw new Error(`अज्ञात कथन प्रकार: ${कथन.प्रकार}`);
     }
   }
 
-  private transpileClass(node: ASTNode): string {
-    const accessModifier = node.accessModifier || '';
-    const methods = node.methods?.map((method: ASTNode) => this.transpileNode(method)).join('\n\n') || '';
-    return `${accessModifier} class ${node.name} {\n${this.indent(methods)}\n}`;
-  }
-
-  private transpileFunction(node: ASTNode): string {
-    const accessModifier = node.accessModifier || '';
-    const params = node.parameters?.join(', ') || '';
-    const body = this.transpileNode(node.body as ASTNode);
-    return `${accessModifier} function ${node.name}(${params}) ${body}`;
-  }
-
-  private transpileIf(node: ASTNode): string {
-    const condition = this.transpileExpression(node.condition as ASTNode);
-    const thenBranch = this.transpileNode(node.thenBranch as ASTNode);
-    const elseBranch = node.elseBranch ? ` else ${this.transpileNode(node.elseBranch)}` : '';
-    return `if (${condition}) ${thenBranch}${elseBranch}`;
-  }
-
-  private transpileLoop(node: ASTNode): string {
-    const condition = this.transpileExpression(node.condition as ASTNode);
-    const body = this.transpileNode(node.body as ASTNode);
-    return `while (${condition}) ${body}`;
-  }
-
-  private transpileTry(node: ASTNode): string {
-    const tryBlock = this.transpileNode(node.tryBlock as ASTNode);
-    const catchBlock = node.catchBlock ? 
-      ` catch (${node.errorVar || 'error'}) ${this.transpileNode(node.catchBlock)}` : '';
-    const finallyBlock = node.finallyBlock ? 
-      ` finally ${this.transpileNode(node.finallyBlock)}` : '';
-    return `try ${tryBlock}${catchBlock}${finallyBlock}`;
-  }
-
-  private transpileBlock(node: ASTNode): string {
-    const statements = node.statements?.map((stmt: ASTNode) => this.transpileNode(stmt)).join('\n') || '';
-    return `{\n${this.indent(statements)}\n}`;
-  }
-
-  private transpileBinary(node: ASTNode): string {
-    const left = this.transpileExpression(node.left as ASTNode);
-    const right = this.transpileExpression(node.right as ASTNode);
-    const operator = this.translateOperator(node.operator as TokenType);
-    return `${left} ${operator} ${right}`;
-  }
-
-  private transpileReturn(node: ASTNode): string {
-    const value = node.value ? this.transpileExpression(node.value) : '';
-    return `return ${value};`;
-  }
-
-  private transpileArray(node: ASTNode): string {
-    const elements = node.elements?.map((elem: ASTNode) => this.transpileExpression(elem)).join(', ') || '';
-    return `[${elements}]`;
-  }
-
-  private transpileObject(node: ASTNode): string {
-    const properties = Object.entries(node.properties || {})
-      .map(([key, value]) => `${key}: ${this.transpileExpression(value as ASTNode)}`)
-      .join(',\n');
-    return `{\n${this.indent(properties)}\n}`;
-  }
-
-  private transpileLiteral(node: ASTNode): string {
-    if (typeof node.value === 'string') {
-      return `"${node.value}"`;
+  private वर्गरूपांतर(कथन: ASTNode): void {
+    this.स्रोत += `class ${कथन.नाम} {\n`;
+    this.स्तर++;
+    
+    for (const विधि of कथन.विधियाँ) {
+      this.स्तरजोड़ें();
+      this.कार्यरूपांतर(विधि);
     }
-    return String(node.value);
+    
+    this.स्तर--;
+    this.स्तरजोड़ें();
+    this.स्रोत += '}\n\n';
   }
 
-  private transpileExpression(node: ASTNode): string {
-    return this.transpileNode(node);
+  private कार्यरूपांतर(कथन: ASTNode): void {
+    const async = कथन.isAsync ? 'async ' : '';
+    this.स्रोत += `${async}function ${कथन.नाम}(`;
+    
+    // Parameters
+    this.स्रोत += कथन.मापदंड
+      .map((param: Parameter) => `${param.name}: ${param.type}`)
+      .join(', ');
+    
+    this.स्रोत += `) {\n`;
+    this.स्तर++;
+    
+    // Function body
+    this.कथनरूपांतर(कथन.शरीर);
+    
+    this.स्तर--;
+    this.स्तरजोड़ें();
+    this.स्रोत += '}\n';
   }
 
-  private transpileFunctionCall(node: ASTNode): string {
-    if (!node.callee) throw new Error("Function call missing callee");
-    const callee = this.transpileExpression(node.callee);
-    const args = node.arguments?.map(arg => this.transpileExpression(arg)).join(', ') || '';
-    return `${callee}(${args})`;
+  private यदिरूपांतर(कथन: ASTNode): void {
+    this.स्रोत += 'if (';
+    this.अभिव्यक्तिरूपांतर(कथन.शर्त);
+    this.स्रोत += ') {\n';
+    
+    this.स्तर++;
+    this.कथनरूपांतर(कथन.तबशाखा);
+    this.स्तर--;
+    
+    this.स्तरजोड़ें();
+    this.स्रोत += '}';
+    
+    if (कथन.अन्यथाशाखा) {
+      this.स्रोत += ' else {\n';
+      this.स्तर++;
+      this.कथनरूपांतर(कथन.अन्यथाशाखा);
+      this.स्तर--;
+      this.स्तरजोड़ें();
+      this.स्रोत += '}';
+    }
+    
+    this.स्रोत += '\n';
   }
 
-  private transpileLogical(node: ASTNode): string {
-    const left = this.transpileExpression(node.left as ASTNode);
-    const right = this.transpileExpression(node.right as ASTNode);
-    const operator = this.translateOperator(node.operator as TokenType);
-    return `${left} ${operator} ${right}`;
+  private प्रयत्नरूपांतर(कथन: ASTNode): void {
+    this.स्रोत += 'try {\n';
+    this.स्तर++;
+    if (कथन.tryBlock) {
+      this.कथनरूपांतर(कथन.tryBlock);
+    }
+    this.स्तर--;
+    this.स्तरजोड़ें();
+    this.स्रोत += '}';
+
+    if (कथन.catchBlock) {
+      this.स्रोत += ' catch (error) {\n';
+      this.स्तर++;
+      this.कथनरूपांतर(कथन.catchBlock);
+      this.स्तर--;
+      this.स्तरजोड़ें();
+      this.स्रोत += '}';
+    }
+
+    if (कथन.finallyBlock) {
+      this.स्रोत += ' finally {\n';
+      this.स्तर++;
+      this.कथनरूपांतर(कथन.finallyBlock);
+      this.स्तर--;
+      this.स्तरजोड़ें();
+      this.स्रोत += '}';
+    }
+
+    this.स्रोत += '\n';
   }
 
-  private transpileBitwise(node: ASTNode): string {
-    const left = this.transpileExpression(node.left as ASTNode);
-    const right = this.transpileExpression(node.right as ASTNode);
-    const operator = this.translateOperator(node.operator as TokenType);
-    return `${left} ${operator} ${right}`;
+  private प्रतिफलरूपांतर(कथन: ASTNode): void {
+    this.स्तरजोड़ें();
+    this.स्रोत += 'return ';
+    this.अभिव्यक्तिरूपांतर(कथन.value);
+    this.स्रोत += ';\n';
   }
 
-  private transpileAssignment(node: ASTNode): string {
-    const name = node.name;
-    const value = this.transpileExpression(node.value);
-    const operator = this.translateOperator(node.operator as TokenType);
-    return `${name} ${operator} ${value}`;
-  }
-
-  private translateOperator(operator: TokenType): string {
-    switch (operator) {
-      case TokenType.YOGA: return '+';
-      case TokenType.VIYOGA: return '-';
-      case TokenType.GUNA: return '*';
-      case TokenType.BHAGA: return '/';
-      case TokenType.SHESH: return '%';
-      case TokenType.SAMAAN: return '==';
-      case TokenType.ASAMAAN: return '!=';
-      case TokenType.ADHIK: return '>';
-      case TokenType.NYOON: return '<';
-      case TokenType.EQUALS: return '=';
-      case TokenType.AUR: return '&&';
-      case TokenType.YA: return '||';
-      case TokenType.NA: return '!';
-      case TokenType.BIT_YOGA: return '&';
-      case TokenType.BIT_VIYOGA: return '|';
-      case TokenType.BIT_XOR: return '^';
-      case TokenType.BIT_VAM: return '<<';
-      case TokenType.BIT_DAKSHIN: return '>>';
-      case TokenType.SAMAAN_YOGA: return '+=';
-      case TokenType.SAMAAN_VIYOGA: return '-=';
-      case TokenType.SAMAAN_GUNA: return '*=';
-      case TokenType.SAMAAN_BHAGA: return '/=';
-      case TokenType.SAMAAN_SHESH: return '%=';
-      default: return operator;
+  private खंडरूपांतर(कथन: ASTNode): void {
+    for (const stmt of कथन.कथन) {
+      this.स्तरजोड़ें();
+      this.कथनरूपांतर(stmt);
     }
   }
 
-  private indent(code: string): string {
-    return code.split('\n').map(line => `  ${line}`).join('\n');
+  private अभिव्यक्तिरूपांतर(कथन: ASTNode): void {
+    if (कथन.प्रकार === 'द्विआधारी') {
+      this.स्रोत += '(';
+      if (कथन.left) {
+        this.अभिव्यक्तिरूपांतर(कथन.left);
+      }
+      
+      const संचालक = this.संचालकमानचित्रण(कथन.operator ?? 'YOGA');
+      this.स्रोत += ` ${संचालक} `;
+      
+      if (कथन.right) {
+        this.अभिव्यक्तिरूपांतर(कथन.right);
+      }
+      this.स्रोत += ')';
+    } else {
+      switch (कथन.प्रकार) {
+        case 'शाब्दिक':
+          if (typeof कथन.value === 'string') {
+            this.स्रोत += `"${कथन.value}"`;
+          } else {
+            this.स्रोत += कथन.value;
+          }
+          break;
+        case 'चर':
+          this.स्रोत += कथन.नाम;
+          break;
+        case 'कार्य_कॉल':
+          this.कार्यकॉलरूपांतर(कथन);
+          break;
+        case 'एकात्मक':
+          this.स्रोत += this.संचालकमानचित्रण(कथन.संचालक ?? 'NA');
+          if (कथन.right) {
+            this.अभिव्यक्तिरूपांतर(कथन.right);
+          }
+          break;
+        case 'समूह':
+          this.स्रोत += '(';
+          this.अभिव्यक्तिरूपांतर(कथन.अभिव्यक्ति);
+          this.स्रोत += ')';
+          break;
+        default:
+          throw new Error(`अज्ञात अभिव्यक्ति प्रकार: ${कथन.प्रकार}`);
+      }
+    }
+  }
+
+  private कार्यकॉलरूपांतर(कथन: ASTNode): void {
+    if (कथन.callee) {
+      this.अभिव्यक्तिरूपांतर(कथन.callee);
+    }
+    
+    this.स्रोत += '(';
+    
+    if (कथन.arguments && कथन.arguments.length > 0) {
+      for (let i = 0; i < कथन.arguments.length; i++) {
+        if (i > 0) {
+          this.स्रोत += ', ';
+        }
+        this.अभिव्यक्तिरूपांतर(कथन.arguments[i]);
+      }
+    }
+    
+    this.स्रोत += ')';
+  }
+
+  private चरघोषणारूपांतर(कथन: ASTNode): void {
+    this.स्तरजोड़ें();
+    this.स्रोत += कथन.isConstant ? 'const ' : 'let ';
+    this.स्रोत += कथन.नाम;
+    
+    if (कथन.initializer) {
+      this.स्रोत += ' = ';
+      this.अभिव्यक्तिरूपांतर(कथन.initializer);
+    }
+    
+    this.स्रोत += ';\n';
+  }
+
+  private स्तरजोड़ें(): void {
+    this.स्रोत += '  '.repeat(this.स्तर);
+  }
+
+  private संचालकमानचित्रण(संचालक: TokenType | string): string {
+    const मानचित्र: { [key: string]: string } = {
+      'YOGA': '+',
+      'VIYOGA': '-',
+      'GUNA': '*',
+      'BHAGA': '/',
+      'SHESH': '%',
+      'SAMAAN': '===',
+      'ASAMAAN': '!==',
+      'ADHIK': '>',
+      'NYOON': '<',
+      'AUR': '&&',
+      'YA': '||',
+      'NA': '!',
+      'BIT_YOGA': '&',
+      'BIT_VIYOGA': '|',
+      'BIT_XOR': '^',
+      'BIT_VAM': '<<',
+      'BIT_DAKSHIN': '>>'
+    };
+    return मानचित्र[संचालक] || संचालक;
   }
 }
+
+// Export the Sanskrit class name as Transpiler for external use
+export const Transpiler = रूपांतरक;
