@@ -39,7 +39,7 @@ export class औपचारिकसत्यापक extends EventEmitter {
 
     async कोडसत्यापन(ast: ASTNode | ASTNode[]): Promise<सत्यापनपरिणाम> {
         const errors: string[] = [];
-        const startTime = new Date();
+        const _startTime = performance.now();
         
         try {
             const nodes = Array.isArray(ast) ? ast : [ast];
@@ -315,7 +315,7 @@ export class औपचारिकसत्यापक extends EventEmitter {
 
     public async verifyMemorySafety(node: ASTNode | ASTNode[]): Promise<सत्यापनपरिणाम> {
         const errors: string[] = [];
-        const startTime = new Date();
+        const _startTime = performance.now();
         
         try {
             const nodes = Array.isArray(node) ? node : [node];
@@ -377,7 +377,7 @@ export class औपचारिकसत्यापक extends EventEmitter {
 
     public async verifyTypeSafety(node: ASTNode | ASTNode[]): Promise<सत्यापनपरिणाम> {
         const errors: string[] = [];
-        const startTime = new Date();
+        const _startTime = performance.now();
         
         try {
             const nodes = Array.isArray(node) ? node : [node];
@@ -425,7 +425,7 @@ export class औपचारिकसत्यापक extends EventEmitter {
 
     public async verifyConcurrencySafety(node: ASTNode | ASTNode[]): Promise<सत्यापनपरिणाम> {
         const errors: string[] = [];
-        const startTime = new Date();
+        const _startTime = performance.now();
         
         try {
             const nodes = Array.isArray(node) ? node : [node];

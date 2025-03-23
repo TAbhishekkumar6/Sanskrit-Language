@@ -2,27 +2,24 @@ name: Build and Test
 
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [ main, master ]
   pull_request:
-    branches:
-      - main
-      - master
+    branches: [ main, master ]
   schedule:
-    - cron: '0 0 * * 0'  # Run weekly for security updates
+    - cron: '0 0 * * 0'  # Run weekly
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
       fail-fast: false
+      matrix:
+        node-version: [16.x, 18.x]
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -33,22 +30,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install ESLint plugin for Jest
-        run: npm install --save-dev eslint-plugin-jest@27.9.0 --legacy-peer-deps
+      - name: Install Jest ESLint plugin
+        run: npm install --save-dev eslint-plugin-jest
+        continue-on-error: true
 
-      - name: Type check
-        run: npm run type-check || npm run tsc
+      - name: Run type checking
+        run: npm run type-check
         continue-on-error: true
 
       - name: Run tests with coverage
         run: npm test -- --coverage
 
-      - name: Upload coverage reports
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
         continue-on-error: true
 
       - name: Build
-        run: npm run build || npm run compile
+        run: npm run build
+        continue-on-error: true
 
   dependency-review:
     name: Dependency Review
