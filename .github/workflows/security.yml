@@ -8,6 +8,13 @@ on:
   schedule:
     - cron: '0 0 * * 0'  # Run weekly
 
+# Add permissions required for code scanning
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+  pull-requests: read
+
 jobs:
   security:
     runs-on: ubuntu-latest
