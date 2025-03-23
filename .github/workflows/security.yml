@@ -44,12 +44,12 @@ jobs:
 
       # These steps will run even without the Snyk token
       - name: Setup CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
 
   dependency-review:
     runs-on: ubuntu-latest

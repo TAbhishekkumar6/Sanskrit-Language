@@ -1,0 +1,76 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*-preview.*' # Preview releases
+      - 'v*-beta.*'    # Beta releases
+      - 'v*'           # Stable releases (without suffixes)
+
+# Add necessary permissions
+permissions:
+  contents: write # Permission to create releases
+  packages: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Determine release type
+        id: release_type
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          if [[ "$TAG" == *-preview.* ]]; then
+            echo "TYPE=preview" >> $GITHUB_OUTPUT
+            echo "This is a preview release"
+          elif [[ "$TAG" == *-beta.* ]]; then
+            echo "TYPE=beta" >> $GITHUB_OUTPUT
+            echo "This is a beta release"
+          else
+            echo "TYPE=stable" >> $GITHUB_OUTPUT
+            echo "This is a stable release"
+          fi
+          echo "VERSION=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Create zip archive
+        run: |
+          RELEASE_TYPE=${{ steps.release_type.outputs.TYPE }}
+          zip -r samskrit-language-$RELEASE_TYPE.zip dist LICENSE README.md package.json
+          echo "Created archive for $RELEASE_TYPE release"
+      
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Sanskrit Language ${{ steps.release_type.outputs.VERSION }}
+          files: |
+            samskrit-language-${{ steps.release_type.outputs.TYPE }}.zip
+          draft: false
+          prerelease: ${{ steps.release_type.outputs.TYPE != 'stable' }}
+          generate_release_notes: true
+          body: |
+            ## Sanskrit Language ${{ steps.release_type.outputs.VERSION }}
+            
+            **Release Type**: ${{ steps.release_type.outputs.TYPE }}
+            
+            ### Installation
+            Download the zip file and extract it to your preferred location. 
+            
+            ### Getting Started
+            Refer to the documentation in the README.md file for details on how to use the Sanskrit Language. 
