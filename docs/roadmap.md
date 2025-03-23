@@ -147,12 +147,12 @@ Implement specific optimizations for Sanskrit programs:
 
 | Version | Expected Release | Key Features |
 |---------|-----------------|--------------|
-| 1.1     | Q3 2024         | Extended standard library, documentation improvements |
-| 1.3     | Q4 2024         | Vedic Mathematics integration, learning resources |
-| 1.5     | Q1 2025         | Native Sanskrit keywords, package repository |
-| 1.7     | Q3 2025         | Enhanced type system, cloud integration |
-| 2.0     | Q1 2026         | Custom Sanskrit parser, native compiler (beta) |
-| 2.5     | Q4 2026         | Complete native compiler and ecosystem |
+| 1.1     | Q3 2025         | Extended standard library, documentation improvements |
+| 1.3     | Q4 2025         | Vedic Mathematics integration, learning resources |
+| 1.5     | Q1 2026         | Native Sanskrit keywords, package repository |
+| 1.7     | Q3 2026         | Enhanced type system, cloud integration |
+| 2.0     | Q1 2027         | Custom Sanskrit parser, native compiler (beta) |
+| 2.5     | Q4 2027         | Complete native compiler and ecosystem |
 
 ## How to Contribute
 
