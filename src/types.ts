@@ -131,6 +131,27 @@ export enum TokenType {
   SATYAPAN = 'SATYAPAN',         // verify
   ASPASHTA = 'ASPASHTA',         // obfuscate
   SANRAKSHIT = 'SANRAKSHIT',     // protected
+
+  // New Metaprogramming Features
+  AAVIRBHAV = 'AAVIRBHAV',   // macro (आविर्भाव - manifestation)
+  ADHYAYAN = 'ADHYAYAN',     // reflection (अध्ययन - study/introspection)
+  SRISHTI = 'SRISHTI',       // code generation (सृष्टि - creation)
+  ANUVAD = 'ANUVAD',         // translation (अनुवाद - translation)
+  
+  // New Concurrency Features
+  SAMANANTAR = 'SAMANANTAR', // parallel (समानांतर - parallel)
+  ANSH = 'ANSH',             // thread (अंश - part/thread)
+  SANCHAAR = 'SANCHAAR',     // channel (संचार - communication)
+  SANKET_SIGNAL = 'SANKET_SIGNAL',         // signal (संकेत - signal)
+  PARTIKSHA = 'PARTIKSHA',   // wait (प्रतीक्षा - wait)
+  
+  // AI Integration Features
+  BUDDHI = 'BUDDHI',         // AI (बुद्धि - intelligence)
+  SHIKSHA = 'SHIKSHA',       // training (शिक्षा - education)
+  GYAN = 'GYAN',             // knowledge (ज्ञान - knowledge)
+  ANUMAN = 'ANUMAN',         // inference (अनुमान - inference)
+  CHITRA = 'CHITRA',         // image (चित्र - image)
+  VAANI = 'VAANI',           // speech (वाणी - speech)
 }
 
 export interface Token {
@@ -352,4 +373,65 @@ export interface SanskritAutoComplete {
 export interface ExpressionNode extends ASTNode {
     type: string;
     प्रकार?: string;
+}
+
+// Add new interfaces for metaprogramming features
+export interface मैक्रोविवरण {
+  नाम: string;
+  पैरामीटर: Parameter[];
+  प्रतिस्थापन: string;
+  विश्लेषणयोग्य: boolean;  // Can be analyzed at compile time
+}
+
+// Add new interfaces for concurrency features
+export interface समानांतरकार्य {
+  नाम: string;
+  प्राथमिकता: number;
+  समयसीमा?: number;  // Timeout in milliseconds
+  वापसीमान: any;      // Return value
+}
+
+export interface संचारचैनल {
+  नाम: string;
+  प्रकार: string;
+  क्षमता: number;
+  पठितमात्र: boolean;
+}
+
+// Add new interfaces for AI integration
+export interface बुद्धिमॉडल {
+  नाम: string;
+  प्रकार: 'भाषा' | 'छवि' | 'ध्वनि' | 'बहुभाषी';
+  स्रोत: string;
+  प्रवेशप्रारूप: string[];
+  निकासप्रारूप: string[];
+  विकल्प: Map<string, any>;
+}
+
+export interface अनुमानविकल्प {
+  तापमान: number;      // Temperature for randomness
+  अधिकतमलंबाई: number; // Max output length
+  सीडवाक्य?: string;    // Seed phrase
+  कॉन्टेक्स्ट?: string; // Context information
+}
+
+export interface छविप्रसंस्करण {
+  स्रोत: string | Buffer;
+  प्रकार: 'वर्गीकरण' | 'पहचान' | 'उत्पादन' | 'परिवर्तन';
+  विकल्प: Map<string, any>;
+}
+
+export interface वाणीविकल्प {
+  भाषा: string;
+  उच्चारणगति: number;
+  स्वर: string;
+  विराम: boolean;
+}
+
+// Compiler directive for natural language understanding
+export interface प्राकृतिकभाषासमझ {
+  इनपुट: string;
+  भाषा: string;
+  उद्देश्य: 'अनुवाद' | 'सारांश' | 'विश्लेषण' | 'उत्तर';
+  संदर्भ?: string;
 }

@@ -1,0 +1,203 @@
+// संस्कृत भाषा प्रोग्रामिंग गाइड (Sanskrit Programming Guide)
+// This file demonstrates Sanskrit programming with romanized equivalents and English translations
+
+// --------------------------------
+// 1. Basic Syntax - मूल वाक्यविन्यास
+// --------------------------------
+
+// Variables and Constants - चर और नियतांक
+let अंकः = 5;              // let ankah = 5;             // Number (anka) defined as 5
+const नामः = "राम";        // const naamah = "Rama";     // Name (naama) defined as "Rama"
+
+// Data Types - डेटा प्रकार
+let संख्या = 10;           // let sankhyaa = 10;         // Number (sankhyaa) - integer type
+let दशमलव = 3.14;         // let dashamalava = 3.14;    // Decimal (dashamalava) - floating-point
+let सत्य = true;           // let satya = true;          // Truth (satya) - boolean true
+let असत्य = false;         // let asatya = false;        // Falsehood (asatya) - boolean false
+let शब्दः = "नमस्ते";      // let shabdah = "namaste";   // Word (shabda) - string type
+let सूची = [1, 2, 3];      // let soochee = [1, 2, 3];   // List (soochee) - array type
+let रिक्त = null;          // let rikta = null;          // Empty (rikta) - null value
+
+// --------------------------------
+// 2. Functions - कार्य (Kaarya)
+// --------------------------------
+
+// Simple function - साधारण कार्य
+function योग(क, ख) {      // function yoga(ka, kha) {    // Addition (yoga) function with params a, b
+    return क + ख;          // return ka + kha;           // Returns sum of parameters
+}
+
+// Arrow function - तीर कार्य
+const गुणन = (क, ख) => क * ख;  // const gunana = (ka, kha) => ka * kha;  // Multiplication (gunana)
+
+// Default parameters - डिफ़ॉल्ट पैरामीटर
+function अभिवादन(नाम = "मित्र") {    // function abhivadana(naama = "mitra") {  // Greeting (abhivadana)
+    return "नमस्ते " + नाम;            // return "Namaste " + naama;              // Returns "Hello friend" by default
+}
+
+// --------------------------------
+// 3. Control Flow - नियंत्रण प्रवाह
+// --------------------------------
+
+// Conditionals - सशर्त कथन
+if (संख्या > 5) {               // if (sankhyaa > 5) {           // If number is greater than 5
+    console.log("बृहत्");       // console.log("brihat");        // Print "large" (brihat)
+} else if (संख्या === 5) {      // else if (sankhyaa === 5) {    // If number equals 5
+    console.log("समान");        // console.log("samaana");       // Print "equal" (samaana)
+} else {                        // else {                        // Otherwise
+    console.log("लघु");         // console.log("laghu");         // Print "small" (laghu)
+}
+
+// Loops - पुनरावर्ती
+for (let इ = 0; इ < 3; इ++) {     // for (let i = 0; i < 3; i++) {   // For loop with iterator i
+    console.log(इ);                // console.log(i);                  // Print the value of i
+}
+
+let ज = 0;                        // let ja = 0;                      // Initialize j to 0
+while (ज < 3) {                   // while (ja < 3) {                 // While j less than 3
+    console.log(ज);                // console.log(ja);                 // Print the value of j
+    ज++;                           // ja++;                            // Increment j
+}
+
+// --------------------------------
+// 4. Advanced: Metaprogramming - उन्नत: आविर्भाव
+// --------------------------------
+
+// Import the metaprogramming module - आविर्भाव मॉड्यूल आयात करें
+import { अध्ययनप्रतिबिंब, सृष्टिकोडजनरेटर } from "../stdlib/aavirbhav";
+// import { adhyayanapratibiMba, srishtiKodaJanerator } from "../stdlib/aavirbhav";
+// Import Reflection and Code Generator from metamodule
+
+// Analyze a function using reflection - प्रतिबिंब का उपयोग करके कार्य का विश्लेषण
+const कार्यविवरण = अध्ययनप्रतिबिंब.कार्यविश्लेषण(योग);
+// const kaaryaVivarana = adhyayanapratibiMba.kaaryaVishleShaNa(yoga);
+// Function description analyzes the "yoga" function using reflection
+
+// Generate code from template - टेम्पलेट से कोड उत्पन्न करें
+const कोडजनरेटर = new सृष्टिकोडजनरेटर();
+// const kodaJanerator = new srishtiKodaJanerator();
+// Initialize a new code generator instance
+
+const टेम्पलेट = `function $नाम$($पैरामीटर$) { return $निकाय$; }`;
+// const templeT = `function $naama$($pairaamiTar$) { return $nikaaya$; }`;
+// Template with placeholders for name, parameters, and body
+
+const उत्पन्नकोड = कोडजनरेटर.टेम्पलेटसेउत्पन्न(टेम्पलेट, {
+// const utpannaKoda = kodaJanerator.templeTaSeUtpanna(templeT, {
+// Generated code from template with replacements:
+    नाम: "वर्ग",             // naama: "varga",         // Function name: "square"
+    पैरामीटर: "क",           // pairaamiTar: "ka",      // Parameter: "k"
+    निकाय: "क * क"           // nikaaya: "ka * ka"      // Body: "k * k"
+});
+
+// --------------------------------
+// 5. Advanced: Concurrency - उन्नत: समानांतर
+// --------------------------------
+
+// Import the concurrency module - समानांतर मॉड्यूल आयात करें
+import { धागासमूह, संचारचैनलप्रबंधक, सभी } from "../stdlib/samanantar";
+// import { dhaagaaSamooha, sanchaarchainalaPrabhandhaka, sabhee } from "../stdlib/samanantar";
+// Import ThreadPool, CommunicationChannelManager, and "all" function
+
+// Create a thread pool - धागा समूह बनाएँ
+const समूह = new धागासमूह(4);  // const samooha = new dhaagaaSamooha(4);  // Create thread pool with 4 threads
+
+// Execute tasks in parallel - समानांतर में कार्य निष्पादित करें
+समूह.निष्पादन(() => {         // samooha.nishpaadana(() => {            // Execute in thread pool
+    console.log("कार्य 1");     // console.log("kaarya 1");               // Task 1
+});
+
+समूह.निष्पादन(() => {         // samooha.nishpaadana(() => {            // Execute in thread pool
+    console.log("कार्य 2");     // console.log("kaarya 2");               // Task 2
+});
+
+// Run multiple functions in parallel - एक साथ कई कार्य चलाएँ
+await सभी([                   // await sabhee([                         // Run all in parallel
+    () => योग(2, 3),           // () => yoga(2, 3),                     // Addition function
+    () => गुणन(4, 5)           // () => gunana(4, 5)                    // Multiplication function
+]);
+
+// Create a communication channel - संचार चैनल बनाएँ
+const चैनल = new संचारचैनलप्रबंधक();  // const chainal = new sanchaarchainalaPrabhandhaka();  // Create channel
+
+// Send and receive messages - संदेश भेजें और प्राप्त करें
+चैनल.भेजें("संदेश");           // chainal.bhejein("sandesh");        // Send message
+const संदेश = await चैनल.प्राप्त();  // const sandesh = await chainal.praapta();  // Receive message
+
+// --------------------------------
+// 6. Advanced: AI Integration - उन्नत: बुद्धि एकीकरण
+// --------------------------------
+
+// Import the AI module - बुद्धि मॉड्यूल आयात करें
+import { भाषामॉडल, छविमॉडल, भाषासमझ } from "../stdlib/buddhi";
+// import { bhaashaaModal, chhaviModal, bhaashaaSamajh } from "../stdlib/buddhi";
+// Import LanguageModel, ImageModel, and NLU module
+
+// Initialize language model - भाषा मॉडल प्रारंभ करें
+const भाषा = new भाषामॉडल({
+// const bhaashaa = new bhaashaaModal({
+    मॉडल: "संस्कृत-लघु",       // modal: "sanskrit-laghu",       // Model: "sanskrit-small"
+    तापमान: 0.7                // taapamaana: 0.7                // Temperature: 0.7
+});
+
+// Generate text with the model - मॉडल से पाठ उत्पन्न करें
+const उत्तर = await भाषा.उत्पन्न("संस्कृत भाषा का इतिहास बताएं");
+// const uttara = await bhaashaa.utpanna("sanskrit bhaashaa kaa itihaas bataayein");
+// Response generated from prompt asking about Sanskrit history
+
+// Initialize image model - छवि मॉडल प्रारंभ करें
+const छवि = new छविमॉडल({
+// const chhavi = new chhaviModal({
+    मॉडल: "दृश्य-विश्लेषक"      // modal: "drishya-vishleShaNaka"   // Model: "visual-analyzer"
+});
+
+// Analyze image - छवि का विश्लेषण करें
+const विश्लेषण = await छवि.विश्लेषण("चित्र.jpg");
+// const vishleShaNa = await chhavi.vishleShaNa("chitra.jpg");
+// Analysis of the image file "picture.jpg"
+
+// --------------------------------
+// 7. Practical Example - व्यावहारिक उदाहरण
+// --------------------------------
+
+// A complete example combining features - सुविधाओं को मिलाकर एक पूर्ण उदाहरण
+
+// Create a text analysis system - पाठ विश्लेषण प्रणाली बनाएँ
+async function पाठविश्लेषक(पाठ) {
+// async function paaThavishleShaka(paaTha) {
+// Text analyzer function with text parameter
+    
+    // Use AI to understand text - पाठ को समझने के लिए AI का उपयोग
+    const समझ = new भाषासमझ();
+    // const samajh = new bhaashaaSamajh();
+    // Initialize language understanding module
+    
+    // Process in parallel - समानांतर में प्रोसेस करें
+    const [भावना, विषय] = await सभी([
+    // const [bhaavana, vishaya] = await sabhee([
+    // Analyze sentiment and topics in parallel
+        () => समझ.भावनाविश्लेषण(पाठ),    // () => samajh.bhaavanaVishleShaNa(paaTha),  // Sentiment analysis
+        () => समझ.विषयपहचान(पाठ)         // () => samajh.vishayaPahachaan(paaTha)      // Topic identification
+    ]);
+    
+    // Generate summary - सारांश उत्पन्न करें
+    const सारांश = await भाषा.उत्पन्न(`निम्नलिखित पाठ का सारांश बनाएं: ${पाठ}`);
+    // const saaraaMsha = await bhaashaa.utpanna(`nimnalikhita paaTha kaa saaraaMsha banaayein: ${paaTha}`);
+    // Generate summary of the provided text
+    
+    return {
+        मूलपाठ: पाठ,          // moolapaaTha: paaTha,      // Original text
+        भावनाफल: भावना,       // bhaavanaPhala: bhaavana,  // Sentiment result
+        पहचानेविषय: विषय,     // pahachaaneVishaya: vishaya, // Identified topics
+        संक्षिप्तसारांश: सारांश // saMkShiptasaaraaMsha: saaraaMsha // Brief summary
+    };
+}
+
+// Example usage - उदाहरण उपयोग
+const विश्लेषणफल = await पाठविश्लेषक("संस्कृत विश्व की प्राचीनतम भाषाओं में से एक है।");
+// const vishleShaNaPhala = await paaThavishleShaka("sanskrit vishwa kee praacheenatam bhaashaaoN mein se ek hai.");
+// Analyze the text: "Sanskrit is one of the oldest languages in the world."
+
+console.log(विश्लेषणफल);
+// console.log(vishleShaNaPhala);
+// Output the analysis results 

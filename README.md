@@ -8,6 +8,7 @@ Sanskrit Programming Language (संस्कृत) is a unique language that 
 
 ## Features
 
+### Core Features
 - **Classical Philosophy**: Based on the precise grammar and logical structures of Sanskrit
 - **Modern Integration**: Compiles to JavaScript for integration with modern web technologies
 - **Dual-Mode Syntax**: Write code in either Devanagari or romanized Sanskrit
@@ -17,6 +18,26 @@ Sanskrit Programming Language (संस्कृत) is a unique language that 
 - **Default Parameters**: Simplified function definitions with default values
 - **Type System**: Inspired by Sanskrit's precision with types
 - **Bilingual Error Messages**: Debugging assistance in both Sanskrit and English
+
+### Advanced Features
+
+#### Metaprogramming
+- **मैक्रो (Macros)**: Compile-time code transformations with `आविर्भाव`
+- **प्रतिबिंब (Reflection)**: Runtime code and object analysis with `अध्ययन`
+- **कोड जनरेशन (Code Generation)**: Dynamic code generation with `सृष्टि`
+- **कोड परिवर्तन (Code Transformation)**: Code manipulation capabilities
+
+#### Concurrency
+- **समानांतर (Parallel Processing)**: Write concurrent functions with `समानांतर`
+- **संचार (Channels)**: Type-safe communication between concurrent tasks
+- **संकेत (Signals)**: Coordinate between parallel processes
+- **धागा (Thread Pool)**: Efficient management of worker threads
+
+#### AI Integration
+- **भाषा मॉडल (Language Models)**: Seamless integration with LLMs
+- **छवि प्रसंस्करण (Image Processing)**: Computer vision capabilities
+- **वाणी (Speech Synthesis/Recognition)**: Voice interaction features
+- **प्राकृतिक भाषा समझ (NLU)**: Natural language understanding
 
 ## Example
 
@@ -40,6 +61,34 @@ karya fibonacci(sankhya: purnanank) -> purnanank {
 }
 ```
 
+## Advanced Example
+
+```sanskrit
+// AI integration with concurrency
+कार्य छविऔरभाषाविश्लेषण(छविपथ: पाठ्य, प्रश्न: पाठ्य) -> वस्तु {
+    चल परिणाम = {};
+    
+    // Run two tasks in parallel
+    समानांतर छविविश्लेषक() {
+        चल विश्लेषक = बुद्धि.छविमॉडल("संस्कृतदृष्टि");
+        प्रतिदा विश्लेषक.विश्लेषण({ स्रोत: छविपथ, प्रकार: "वर्गीकरण" });
+    }
+    
+    समानांतर भाषाप्रोसेसर() {
+        चल मॉडल = बुद्धि.भाषामॉडल("संस्कृतजीपीटी");
+        प्रतिदा मॉडल.अनुमान(प्रश्न, { तापमान: 0.7 });
+    }
+    
+    // Wait for both tasks to complete
+    [परिणाम.छवि, परिणाम.भाषा] = प्रतीक्षा समानांतर.सभी([
+        छविविश्लेषक(),
+        भाषाप्रोसेसर()
+    ]);
+    
+    प्रतिदा परिणाम;
+}
+```
+
 ## Installation
 
 ```bash
@@ -57,12 +106,16 @@ samskrit run myprogram.sam
 See the `docs/` directory for comprehensive documentation:
 
 - [Improved Syntax Guide](docs/improved_syntax.md)
+- [Enhanced Features Guide](docs/enhanced_features.md)
 - [Language Specification](docs/language_spec.md)
 - [Features Summary](docs/SUMMARY.md)
+- [Future Roadmap](docs/roadmap.md) - See our plans for upcoming Sanskrit language features
 
 ## Philosophy
 
 Sanskrit is known for its precise grammar, rich vocabulary, and logical structure. This programming language aims to apply those principles to create code that is not only functional but also linguistically elegant and philosophically sound.
+
+The enhanced features further extend this philosophy by bringing modern computing capabilities into harmony with Sanskrit's traditional wisdom.
 
 ## License
 
