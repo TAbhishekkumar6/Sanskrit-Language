@@ -35,11 +35,13 @@
     "benchmark": "ts-node src/benchmark/index.ts",
     "generate-ast": "ts-node src/tools/ast-generator.ts",
     "validate": "npm run type-check && npm run lint && npm run test",
-    "release:patch": "npm version patch && git push && git push --tags",
-    "release:minor": "npm version minor && git push && git push --tags",
-    "release:major": "npm version major && git push && git push --tags",
-    "release:preview": "npm version prerelease --preid=preview && git push && git push --tags",
-    "release:beta": "npm version prerelease --preid=beta && git push && git push --tags"
+    "version:patch": "npm version patch && git push",
+    "version:minor": "npm version minor && git push",
+    "version:major": "npm version major && git push",
+    "create:beta": "git checkout -b beta && git push -u origin beta",
+    "create:preview": "git checkout -b preview && git push -u origin preview",
+    "sync:beta": "git checkout beta && git merge master && git push && git checkout master",
+    "sync:preview": "git checkout preview && git merge beta && git push && git checkout master"
   },
   "keywords": [
     "sanskrit",

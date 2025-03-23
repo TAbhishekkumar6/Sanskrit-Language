@@ -2,10 +2,12 @@ name: Create Release
 
 on:
   push:
-    tags:
-      - 'v*-preview.*' # Preview releases
-      - 'v*-beta.*'    # Beta releases
-      - 'v*'           # Stable releases (without suffixes)
+    branches:
+      - master   # Stable releases
+      - beta     # Beta releases
+      - preview  # Preview releases
+    paths:
+      - 'package.json' # Only trigger when package.json changes (likely version updates)
 
 # Add necessary permissions
 permissions:
@@ -19,6 +21,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Need full history for versioning
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -32,42 +36,52 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Determine release type
-        id: release_type
+      - name: Get version and determine release type
+        id: package_version
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          if [[ "$TAG" == *-preview.* ]]; then
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          
+          # Determine release type based on branch
+          BRANCH=${GITHUB_REF#refs/heads/}
+          if [[ "$BRANCH" == "preview" ]]; then
             echo "TYPE=preview" >> $GITHUB_OUTPUT
-            echo "This is a preview release"
-          elif [[ "$TAG" == *-beta.* ]]; then
+            echo "This is a preview release from preview branch"
+          elif [[ "$BRANCH" == "beta" ]]; then
             echo "TYPE=beta" >> $GITHUB_OUTPUT
-            echo "This is a beta release"
-          else
+            echo "This is a beta release from beta branch"
+          elif [[ "$BRANCH" == "master" ]]; then
             echo "TYPE=stable" >> $GITHUB_OUTPUT
-            echo "This is a stable release"
+            echo "This is a stable release from master branch"
+          else
+            echo "TYPE=development" >> $GITHUB_OUTPUT
+            echo "This is a development build from $BRANCH branch"
           fi
-          echo "VERSION=$TAG" >> $GITHUB_OUTPUT
 
       - name: Create zip archive
         run: |
-          RELEASE_TYPE=${{ steps.release_type.outputs.TYPE }}
-          zip -r samskrit-language-$RELEASE_TYPE.zip dist LICENSE README.md package.json
-          echo "Created archive for $RELEASE_TYPE release"
+          RELEASE_TYPE=${{ steps.package_version.outputs.TYPE }}
+          VERSION=${{ steps.package_version.outputs.VERSION }}
+          ZIP_NAME="samskrit-language-v${VERSION}-${RELEASE_TYPE}"
+          zip -r "${ZIP_NAME}.zip" dist LICENSE README.md package.json
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+          echo "Created archive for $RELEASE_TYPE release v$VERSION"
       
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          name: Sanskrit Language ${{ steps.release_type.outputs.VERSION }}
+          tag_name: v${{ steps.package_version.outputs.VERSION }}-${{ steps.package_version.outputs.TYPE }}
+          name: Sanskrit Language v${{ steps.package_version.outputs.VERSION }} (${{ steps.package_version.outputs.TYPE }})
           files: |
-            samskrit-language-${{ steps.release_type.outputs.TYPE }}.zip
+            ${{ env.ZIP_NAME }}.zip
           draft: false
-          prerelease: ${{ steps.release_type.outputs.TYPE != 'stable' }}
+          prerelease: ${{ steps.package_version.outputs.TYPE != 'stable' }}
           generate_release_notes: true
           body: |
-            ## Sanskrit Language ${{ steps.release_type.outputs.VERSION }}
+            ## Sanskrit Language v${{ steps.package_version.outputs.VERSION }} (${{ steps.package_version.outputs.TYPE }} release)
             
-            **Release Type**: ${{ steps.release_type.outputs.TYPE }}
+            Built from the ${{ github.ref_name }} branch.
             
             ### Installation
             Download the zip file and extract it to your preferred location. 
