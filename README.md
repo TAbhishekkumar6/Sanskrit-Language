@@ -1,13 +1,14 @@
-# संस्कृत (Sanskrit) Programming Language
+# संस्कृत भाषा (Sanskrit Language)
 
-A programming language inspired by the ancient Sanskrit language, combining classical linguistic principles with modern programming paradigms.
+A programming language implementation in Sanskrit.
 
-## About
+## मानक पुस्तकालय (Standard Library)
 
-Sanskrit Programming Language (संस्कृत) is a unique language that applies the precision, structure, and elegance of Sanskrit to computer programming. This project aims to create a programming language that is accessible to both Sanskrit scholars and modern programmers.
+The standard library provides a comprehensive set of modules for common programming tasks. For detailed documentation, see [Standard Library Documentation](docs/stdlib.md).
 
-## Features
+### उपलब्ध मॉड्यूल (Available Modules)
 
+<<<<<<< Updated upstream
 ### Core Features
 - **Classical Philosophy**: Based on the precise grammar and logical structures of Sanskrit
 - **Modern Integration**: Compiles to JavaScript for integration with modern web technologies
@@ -40,27 +41,31 @@ Sanskrit Programming Language (संस्कृत) is a unique language that 
 - **प्राकृतिक भाषा समझ (NLU)**: Natural language understanding
 
 ## Example
+=======
+- आधार (Aadhaara) - Core data structures
+- आगम (Aagama) - Input/Output operations
+- संवाद (Samvaada) - Networking
+- परीक्षण (Pareekshana) - Testing framework
+- प्रमाण (Pramaana) - Validation
+- सुरक्षा (Surakshaa) - Security
+- प्रलेखन (Pralekhana) - Documentation
 
-```sanskrit
-कार्य फिबोनाची(संख्या: पूर्णांक) -> पूर्णांक {
-    यदि (संख्या <= 1) {
-        प्रतिदा संख्या;
-    }
-    प्रतिदा फिबोनाची(संख्या - 1) + फिबोनाची(संख्या - 2);
-}
-```
+## उदाहरण (Examples)
+>>>>>>> Stashed changes
 
-## Romanized Equivalent
+We provide various examples to help you get started with Sanskrit Language programming:
 
-```sanskrit
-karya fibonacci(sankhya: purnanank) -> purnanank {
-    yadi (sankhya <= 1) {
-        pratida sankhya;
-    }
-    pratida fibonacci(sankhya - 1) + fibonacci(sankhya - 2);
-}
-```
+### मूल उदाहरण (Basic Examples)
+- [नमस्ते संसार (Hello World)](examples/basic/namaste.ts) - Basic console output
+- [गणक (Calculator)](examples/basic/ganaka.ts) - Simple calculations
+- [सूची (Array Operations)](examples/basic/soochee.ts) - List manipulation
 
+### मध्यम उदाहरण (Intermediate Examples)
+- [फ़ाइल संचालन (File Operations)](examples/intermediate/file_ops.ts) - File handling
+- [डेटा सत्यापन (Data Validation)](examples/intermediate/validation.ts) - Schema validation
+- [HTTP सर्वर (HTTP Server)](examples/intermediate/http_server.ts) - Web server
+
+<<<<<<< Updated upstream
 ## Advanced Example
 
 ```sanskrit
@@ -90,21 +95,35 @@ karya fibonacci(sankhya: purnanank) -> purnanank {
 ```
 
 ## Installation
+=======
+### उन्नत उदाहरण (Advanced Examples)
+- [वार्तालाप (Chat Application)](examples/advanced/chat.ts) - WebSocket-based chat
+- [उपयोगकर्ता प्रमाणीकरण (User Authentication)](examples/advanced/auth.ts) - Secure login
+- [डेटा प्रसंस्करण (Data Processing)](examples/advanced/data_processing.ts) - Complex operations
+
+See the [examples directory](examples/) for more detailed examples and documentation.
+
+## स्थापना (Installation)
+>>>>>>> Stashed changes
 
 ```bash
-npm install samskrit
+npm install sanskrit-language
 ```
 
-## Running a Program
+## विकास (Development)
 
 ```bash
-samskrit run myprogram.sam
+git clone https://github.com/yourusername/sanskrit-language.git
+cd sanskrit-language
+npm install
+npm test
 ```
 
-## Documentation
+## योगदान (Contributing)
 
-See the `docs/` directory for comprehensive documentation:
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
+<<<<<<< Updated upstream
 - [Improved Syntax Guide](docs/improved_syntax.md)
 - [Enhanced Features Guide](docs/enhanced_features.md)
 - [Language Specification](docs/language_spec.md)
@@ -124,3 +143,8 @@ MIT License
 ## Contributors
 
 This project welcomes contributions from both computer scientists and Sanskrit scholars. 
+=======
+## लाइसेंस (License)
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+>>>>>>> Stashed changes
