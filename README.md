@@ -1,150 +1,200 @@
 # संस्कृत भाषा (Sanskrit Language)
 
-A programming language implementation in Sanskrit.
+A programming language inspired by the ancient Sanskrit language, combining classical linguistic principles with modern programming paradigms.
 
-## मानक पुस्तकालय (Standard Library)
+## About
 
-The standard library provides a comprehensive set of modules for common programming tasks. For detailed documentation, see [Standard Library Documentation](docs/stdlib.md).
+Sanskrit Programming Language (संस्कृत) is a unique language that applies the precision, structure, and elegance of Sanskrit to computer programming. This project aims to create a programming language that is accessible to both Sanskrit scholars and modern programmers.
 
-### उपलब्ध मॉड्यूल (Available Modules)
+## Core Features
 
-<<<<<<< Updated upstream
-### Core Features
-- **Classical Philosophy**: Based on the precise grammar and logical structures of Sanskrit
-- **Modern Integration**: Compiles to JavaScript for integration with modern web technologies
-- **Dual-Mode Syntax**: Write code in either Devanagari or romanized Sanskrit
-- **Symbolic Operators**: Use standard mathematical symbols instead of word-based operators
-- **Pattern Matching**: Elegant pattern matching for expressive conditional logic
-- **String Interpolation**: Template literals for easy string formatting
-- **Default Parameters**: Simplified function definitions with default values
-- **Type System**: Inspired by Sanskrit's precision with types
+### Language Design
+- **Dual-Mode Syntax**: Write code in either Devanagari or Romanized Sanskrit
+- **Type System**: Strong typing with Sanskrit terminology
+- **Error Handling**: Sanskrit-based error types and messages
+- **Module System**: Organized library structure with Sanskrit naming
+
+### Standard Library
+- **परीक्षण (Testing)**: Test suite management with assertions and hooks
+- **प्रमाण (Validation)**: Schema-based data validation with type checking
+- **सुरक्षा (Security)**: Encryption, hashing, and cryptographic functions
+- **संवाद (Networking)**: WebSocket and HTTP communication protocols
+
+### Developer Tools
+- **Documentation**: Bilingual documentation in Devanagari and Roman scripts
+- **Examples**: Practical code samples in both writing systems
+- **Type Definitions**: TypeScript type support for IDE integration
+- **Error Messages**: Descriptive errors in both Sanskrit and English
+
+### Modern Integration
+- **TypeScript/JavaScript**: Built on TypeScript for modern development
+- **Node.js Support**: Full compatibility with Node.js ecosystem
+- **NPM Package**: Available as an npm package for easy installation
+- **Web Compatible**: Works in both browser and server environments
+
+### Developer Experience
 - **Bilingual Error Messages**: Debugging assistance in both Sanskrit and English
+- **Rich IDE Support**: Syntax highlighting and code completion
+- **Interactive REPL**: Sanskrit-aware command-line interface
+- **Hot Module Reloading**: Fast development cycle with instant feedback
 
-### Advanced Features
+### Safety and Security
+- **Static Type Checking**: Catch errors at compile time
+- **Memory Safety**: Automatic memory management
+- **Thread Safety**: Safe concurrent programming primitives
+- **Secure by Default**: Built-in security best practices
 
-#### Metaprogramming
-- **मैक्रो (Macros)**: Compile-time code transformations with `आविर्भाव`
-- **प्रतिबिंब (Reflection)**: Runtime code and object analysis with `अध्ययन`
-- **कोड जनरेशन (Code Generation)**: Dynamic code generation with `सृष्टि`
-- **कोड परिवर्तन (Code Transformation)**: Code manipulation capabilities
+### Documentation and Learning
+- **Bilingual Documentation**: Complete documentation in both Devanagari and Roman scripts
+- **Code Examples**: Practical examples from basic to advanced levels
+- **Standard Library Reference**: Detailed API documentation with Sanskrit terminology explanations
+- **Implementation Guide**: Clear guidelines for using language features and modules
 
-#### Concurrency
-- **समानांतर (Parallel Processing)**: Write concurrent functions with `समानांतर`
-- **संचार (Channels)**: Type-safe communication between concurrent tasks
-- **संकेत (Signals)**: Coordinate between parallel processes
-- **धागा (Thread Pool)**: Efficient management of worker threads
+## Standard Library (मानक पुस्तकालय)
 
-#### AI Integration
-- **भाषा मॉडल (Language Models)**: Seamless integration with LLMs
-- **छवि प्रसंस्करण (Image Processing)**: Computer vision capabilities
-- **वाणी (Speech Synthesis/Recognition)**: Voice interaction features
-- **प्राकृतिक भाषा समझ (NLU)**: Natural language understanding
+Our comprehensive standard library provides core functionality in both Devanagari and Romanized Sanskrit:
 
-## Example
-=======
-- आधार (Aadhaara) - Core data structures
-- आगम (Aagama) - Input/Output operations
-- संवाद (Samvaada) - Networking
-- परीक्षण (Pareekshana) - Testing framework
-- प्रमाण (Pramaana) - Validation
-- सुरक्षा (Surakshaa) - Security
-- प्रलेखन (Pralekhana) - Documentation
+### 1. परीक्षण (Parikshan) - Testing Framework
+```typescript
+import { परीक्षणसमूह, दावा } from './src/stdlib/parikshan';
 
-## उदाहरण (Examples)
->>>>>>> Stashed changes
+const परीक्षण = new परीक्षणसमूह('गणित परीक्षण');
+परीक्षण.परीक्षा('जोड़', () => {
+    दावा.बराबर(2 + 2, 4);
+});
+```
 
-We provide various examples to help you get started with Sanskrit Language programming:
+### 2. प्रमाण (Pramaana) - Validation
+```typescript
+import { प्रमाणक } from './src/stdlib/pramaana';
 
-### मूल उदाहरण (Basic Examples)
-- [नमस्ते संसार (Hello World)](examples/basic/namaste.ts) - Basic console output
-- [गणक (Calculator)](examples/basic/ganaka.ts) - Simple calculations
-- [सूची (Array Operations)](examples/basic/soochee.ts) - List manipulation
+const योजना = {
+    प्रकार: "वस्तु",
+    गुण: {
+        नाम: { प्रकार: "स्ट्रिंग", आवश्यक: true },
+        आयु: { प्रकार: "संख्या", न्यूनतम: 0 }
+    }
+};
+```
 
-### मध्यम उदाहरण (Intermediate Examples)
-- [फ़ाइल संचालन (File Operations)](examples/intermediate/file_ops.ts) - File handling
-- [डेटा सत्यापन (Data Validation)](examples/intermediate/validation.ts) - Schema validation
-- [HTTP सर्वर (HTTP Server)](examples/intermediate/http_server.ts) - Web server
+### 3. सुरक्षा (Surakshaa) - Security
+```typescript
+import { एन्क्रिप्शन } from './src/stdlib/surakshaa';
 
-<<<<<<< Updated upstream
-## Advanced Example
+const एन्क्रिप्टर = new एन्क्रिप्शन('गुप्त-कुंजी');
+const गुप्तडेटा = एन्क्रिप्टर.एन्क्रिप्ट('गोपनीय संदेश');
+```
 
+### 4. संवाद (Samvaada) - Networking
+```typescript
+import { WebSocketसर्वर } from './src/stdlib/samvaada';
+
+const सर्वर = new WebSocketसर्वर(8080);
+सर्वर.कनेक्शनपर((ग्राहक) => {
+    ग्राहक.सुनें((संदेश) => console.log('प्राप्त:', संदेश));
+});
+```
+
+## Code Examples
+
+### Basic Sanskrit Program
 ```sanskrit
-// AI integration with concurrency
-कार्य छविऔरभाषाविश्लेषण(छविपथ: पाठ्य, प्रश्न: पाठ्य) -> वस्तु {
-    चल परिणाम = {};
-    
-    // Run two tasks in parallel
-    समानांतर छविविश्लेषक() {
-        चल विश्लेषक = बुद्धि.छविमॉडल("संस्कृतदृष्टि");
-        प्रतिदा विश्लेषक.विश्लेषण({ स्रोत: छविपथ, प्रकार: "वर्गीकरण" });
+कार्य फिबोनाची(संख्या: पूर्णांक) -> पूर्णांक {
+    यदि (संख्या <= 1) {
+        प्रतिदा संख्या;
     }
-    
-    समानांतर भाषाप्रोसेसर() {
-        चल मॉडल = बुद्धि.भाषामॉडल("संस्कृतजीपीटी");
-        प्रतिदा मॉडल.अनुमान(प्रश्न, { तापमान: 0.7 });
-    }
-    
-    // Wait for both tasks to complete
-    [परिणाम.छवि, परिणाम.भाषा] = प्रतीक्षा समानांतर.सभी([
-        छविविश्लेषक(),
-        भाषाप्रोसेसर()
-    ]);
-    
-    प्रतिदा परिणाम;
+    प्रतिदा फिबोनाची(संख्या - 1) + फिबोनाची(संख्या - 2);
 }
 ```
 
-## Installation
-=======
-### उन्नत उदाहरण (Advanced Examples)
-- [वार्तालाप (Chat Application)](examples/advanced/chat.ts) - WebSocket-based chat
-- [उपयोगकर्ता प्रमाणीकरण (User Authentication)](examples/advanced/auth.ts) - Secure login
-- [डेटा प्रसंस्करण (Data Processing)](examples/advanced/data_processing.ts) - Complex operations
+### Romanized Equivalent
+```sanskrit
+karya fibonacci(sankhya: purnanank) -> purnanank {
+    yadi (sankhya <= 1) {
+        pratida sankhya;
+    }
+    pratida fibonacci(sankhya - 1) + fibonacci(sankhya - 2);
+}
+```
 
-See the [examples directory](examples/) for more detailed examples and documentation.
+## Documentation
 
-## स्थापना (Installation)
->>>>>>> Stashed changes
+### Core Documentation
+- [Language Specification](docs/language_spec.md)
+- [Improved Syntax Guide](docs/improved_syntax.md)
+- [Enhanced Features](docs/enhanced_features.md)
 
+### Library and Development
+- [Standard Library Documentation](docs/stdlib.md)
+- [Examples Guide](examples/README.md)
+- [Contributing Guidelines](docs/contributing.md)
+
+### Project Planning
+- [Future Roadmap](docs/roadmap.md)
+- [Features Summary](docs/SUMMARY.md)
+
+## Example Directory Structure
+
+The `examples/` directory contains practical implementations:
+
+### Basic Examples
+- `namaste.ts`: Hello World program
+- `calculator_romanized.ts`: Basic calculator with Romanized Sanskrit
+
+### Intermediate Examples
+- `validation.ts`: Data validation examples
+- `array_romanized.ts`: Array operations
+
+### Advanced Examples
+- `chat.ts`: Real-time chat application with encryption
+
+## Development
+
+### Prerequisites
+- Node.js (v14 or higher)
+- TypeScript (v4.5 or higher)
+
+### Installation and Setup
 ```bash
 npm install sanskrit-language
 ```
 
-## विकास (Development)
-
+### Development Commands
 ```bash
-git clone https://github.com/yourusername/sanskrit-language.git
-cd sanskrit-language
-npm install
+# Run a Sanskrit program
+samskrit run myprogram.sam
+
+# Build the project
+npm run build
+
+# Run tests
 npm test
 ```
 
-## योगदान (Contributing)
+## Sanskrit Terms Reference
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+| Sanskrit Term | Romanized | English |
+|--------------|-----------|----------|
+| परीक्षण | Parikshan | Testing |
+| प्रमाण | Pramaana | Validation |
+| सुरक्षा | Surakshaa | Security |
+| संवाद | Samvaada | Communication |
+| दावा | Daava | Assertion |
+| योजना | Yojana | Schema |
+| सत्यापक | Satyapak | Validator |
 
-<<<<<<< Updated upstream
-- [Improved Syntax Guide](docs/improved_syntax.md)
-- [Enhanced Features Guide](docs/enhanced_features.md)
-- [Language Specification](docs/language_spec.md)
-- [Features Summary](docs/SUMMARY.md)
-- [Future Roadmap](docs/roadmap.md) - See our plans for upcoming Sanskrit language features
+## Contributing
+
+We welcome contributions from both computer scientists and Sanskrit scholars. Please read our [contributing guidelines](docs/contributing.md) before submitting pull requests.
 
 ## Philosophy
 
-Sanskrit is known for its precise grammar, rich vocabulary, and logical structure. This programming language aims to apply those principles to create code that is not only functional but also linguistically elegant and philosophically sound.
-
-The enhanced features further extend this philosophy by bringing modern computing capabilities into harmony with Sanskrit's traditional wisdom.
+Sanskrit is known for its precise grammar, rich vocabulary, and logical structure. This programming language applies these principles to create code that is not only functional but also linguistically elegant and philosophically sound.
 
 ## License
 
 MIT License
 
-## Contributors
+## Acknowledgments
 
-This project welcomes contributions from both computer scientists and Sanskrit scholars. 
-=======
-## लाइसेंस (License)
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
->>>>>>> Stashed changes
+Special thanks to contributors and Sanskrit scholars who helped with terminology and concepts. 
