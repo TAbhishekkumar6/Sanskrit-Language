@@ -2,9 +2,9 @@ name: Code Quality
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, Preview, beta ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, Preview, beta ]
 
 # Add permissions required for code quality checks
 permissions:

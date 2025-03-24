@@ -1,7 +1,8 @@
-name: Create Release
+name: Release
 
 on:
   push:
+    branches: [ main, master, Preview, beta ]
     tags:
       - 'v*-preview.*' # Preview releases
       - 'v*-beta.*'    # Beta releases
@@ -73,4 +74,4 @@ jobs:
             Download the zip file and extract it to your preferred location. 
             
             ### Getting Started
-            Refer to the documentation in the README.md file for details on how to use the Sanskrit Language. 
+            Refer to the documentation in the README.md file for details on how to use the Sanskrit Language.

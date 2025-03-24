@@ -1,10 +1,10 @@
-name: Security Checks
+name: Security Scan
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, Preview, beta ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, Preview, beta ]
   schedule:
     - cron: '0 0 * * 0'  # Run weekly
 
