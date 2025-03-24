@@ -53,7 +53,7 @@ Implement a type system based on Sanskrit philosophical categories:
 - `विशेष` (vishesha) - Specific/particular types
 - `समवाय` (samawaaya) - Inherent relationship types
 
-### 4. Extended Standard Library (Version 1.3)
+### 4. Extended Standard Library (Version 1.1)
 
 Add new modules to the standard library:
 - `आगम` (aagama) - File I/O and resource management
