@@ -3,10 +3,6 @@ name: Release
 on:
   push:
     branches: [ main, master, Preview, beta ]
-    tags:
-      - 'v*-preview.*' # Preview releases
-      - 'v*-beta.*'    # Beta releases
-      - 'v*'           # Stable releases (without suffixes)
 
 # Add necessary permissions
 permissions:
@@ -14,12 +10,14 @@ permissions:
   packages: read
 
 jobs:
-  build:
+  create-tag-and-release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -30,24 +28,42 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Get version from package.json
+        id: package_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          BRANCH=${GITHUB_REF#refs/heads/}
+          if [[ "$BRANCH" == "Preview" ]]; then
+            TAG="v${VERSION}-preview.$(date +'%Y%m%d%H%M%S')"
+          elif [[ "$BRANCH" == "beta" ]]; then
+            TAG="v${VERSION}-beta.$(date +'%Y%m%d%H%M%S')"
+          else
+            TAG="v${VERSION}"
+          fi
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create and push tag
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag ${{ steps.package_version.outputs.TAG }}
+          git push origin ${{ steps.package_version.outputs.TAG }}
+
       - name: Build project
         run: npm run build
 
       - name: Determine release type
         id: release_type
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
+          TAG=${{ steps.package_version.outputs.TAG }}
           if [[ "$TAG" == *-preview.* ]]; then
             echo "TYPE=preview" >> $GITHUB_OUTPUT
-            echo "This is a preview release"
           elif [[ "$TAG" == *-beta.* ]]; then
             echo "TYPE=beta" >> $GITHUB_OUTPUT
-            echo "This is a beta release"
           else
             echo "TYPE=stable" >> $GITHUB_OUTPUT
-            echo "This is a stable release"
           fi
-          echo "VERSION=$TAG" >> $GITHUB_OUTPUT
 
       - name: Create zip archive
         run: |
@@ -59,14 +75,15 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          name: Sanskrit Language ${{ steps.release_type.outputs.VERSION }}
+          tag_name: ${{ steps.package_version.outputs.TAG }}
+          name: Sanskrit Language ${{ steps.package_version.outputs.TAG }}
           files: |
             samskrit-language-${{ steps.release_type.outputs.TYPE }}.zip
           draft: false
           prerelease: ${{ steps.release_type.outputs.TYPE != 'stable' }}
           generate_release_notes: true
           body: |
-            ## Sanskrit Language ${{ steps.release_type.outputs.VERSION }}
+            ## Sanskrit Language ${{ steps.package_version.outputs.TAG }}
             
             **Release Type**: ${{ steps.release_type.outputs.TYPE }}
             
