@@ -1,6 +1,6 @@
 {
   "name": "samskrit",
-  "version": "0.1.0",
+  "version": "0.1.1-preview.0",
   "description": "A Sanskrit-based programming language for web, Android, and iOS development",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
